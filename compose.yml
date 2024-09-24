@@ -1,0 +1,15 @@
+services:
+  # server:
+  #   build:
+  #     context: ./server
+  #     dockerfile: Dockerfile
+
+  db:
+    image: postgres:16-alpine3.20
+    restart: always
+    env_file:
+      - ./db/postgres.env
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
