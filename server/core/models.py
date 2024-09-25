@@ -48,7 +48,7 @@ class Product(db.Model):
     )
 
     category_id = Column(Integer, ForeignKey("category.id"))
-    seasonal_event_id = Column(Integer, ForeignKey("seasonal_event.id", nullable=True))
+    seasonal_event_id = Column(Integer, ForeignKey("seasonal_event.id"))
 
     def __repr__(self) -> str:
         return f"<Product Name: {self.name}>"
@@ -88,7 +88,7 @@ class ProductImage(db.Model):
         return f"<Product Image: {self.id}>"
 
 
-class SeasonalEvent(db.model):
+class SeasonalEvent(db.Model):
     __tablename__ = "seasonal_event"
 
     id = Column(Integer, primary_key=True)
