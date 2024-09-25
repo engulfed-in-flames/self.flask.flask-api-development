@@ -97,4 +97,53 @@ class SeasonalEvent(db.Model):
     name = Column(String(100), unique=True)
 
     def __repr__(self) -> str:
-        return f"<{self.name}>"
+        return f"<Seasonal Event: {self.name}>"
+
+
+class Attribute(db.Model):
+    __tablename__ = "attribute"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(200))
+    description = Column(Text)
+
+    def __repr__(self):
+        return f"<Attribute: {self.name}>"
+
+
+class AttributeValue(db.Model):
+    __tablename__ = "attribute_value"
+
+    id = Column(Integer, primary_key=True)
+    attribute_value = Column(String(100))
+    attribute_id = Column(Integer, ForeignKey("attribute.id"))
+
+    def __repr__(self):
+        return f"<Attribute Value: {self.attribute_value}>"
+
+
+class ProductType(db.Model):
+    __tablename__ = "product_type"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(100))
+    parent_id = Column(Integer, ForeignKey("product_type.id"))
+
+    def __repr__(self):
+        return f"<Product Type: {self.name}>"
+
+
+class Product_ProductType(db.Model):
+    __tablename__ = "product_product_type"
+
+    id = Column(Integer, primary_key=True)
+    product_id = Column(Integer, ForeignKey("product.id"))
+    product_type_id = Column(Integer, ForeignKey("product_type.id"))
+
+
+class ProductLine_AttributeValue(db.Model):
+    __tablename__ = "product_line_attribute_value"
+
+    id = Column(Integer, primary_key=True)
+    product_line_id = Column(Integer, ForeignKey("product_line.id"))
+    attribute_value_id = Column(Integer, ForeignKey("attribute_value.id"))
