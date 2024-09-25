@@ -25,6 +25,10 @@ class DevelopmentConfig(Config):
     )
 
     SQLALCHEMY_DATABASE_URI = url_object
+    APIFAIRY_VERSION = "1.0"
+    APIFAIRY_UI = "rapidoc"  # swagger_ui
+    APIFAIRY_TITLE = "FKCOMMERCE Project"
+
     DEBUG = True
 
 
