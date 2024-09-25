@@ -1,9 +1,4 @@
 services:
-  # server:
-  #   build:
-  #     context: ./server
-  #     dockerfile: Dockerfile
-
   db:
     image: postgres:16-alpine3.20
     restart: always
