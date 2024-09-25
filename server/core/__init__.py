@@ -1,25 +1,28 @@
 import os
 
+from dotenv import load_dotenv
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from dotenv import load_dotenv
-
+from flask_migrate import Migrate
 
 
 load_dotenv("flask.env")
 
-database = SQLAlchemy()
+db = SQLAlchemy()
+db_migration = Migrate()
+
 
 def create_app(config_type=os.getenv("CONFIG_TYPE")):
-  app = Flask(__name__)
+    app = Flask(__name__)
+    app.config.from_object(config_type)
 
-  app.config.from_object(config_type)
+    initialize_extensions(app)
 
-  initialize_extensions(app)
+    return app
 
-  return app
 
 def initialize_extensions(app):
+    db.init_app(app)
+    db_migration.init_app(app, db)
 
-  database.init_app(app)
-
+    import core.models  # noqa: F401
