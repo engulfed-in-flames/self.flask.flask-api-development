@@ -7,7 +7,7 @@
 ## Basic Database Management
 
 - `\l`: List all databases.
-- `\c` database_name: Connect to a specific database.
+- `\c database_name`: Connect to a specific database.
 - `\q`: Quit the current database connection.
 - `\x`: Toggle expanded output format.
 - `\d`: Describe a table, view, or function.
