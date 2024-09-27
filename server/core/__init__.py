@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
 from apifairy import APIFairy
+from lab.dynamodb import create_user, create_user_table, find_user
 
 
 load_dotenv("flask.env")
@@ -22,6 +23,10 @@ def create_app(config_type=os.getenv("CONFIG_TYPE")):
     app.config.from_object(config_type)
     initialize_extensions(app)
     register_blueprint(app)
+
+    # create_user_table()
+    # create_user()
+    find_user()
 
     return app
 
