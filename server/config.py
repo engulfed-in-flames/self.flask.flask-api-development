@@ -11,6 +11,11 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY")
     FLASK_ENV = os.getenv("FLASK_ENV")
+
+    CSRF_ENABLED = True
+    WTF_CSRF_ENABLED = True
+
+    TESTING = False
     DEBUG = os.getenv("FLASK_DEBUG")
 
 
@@ -29,6 +34,9 @@ class DevelopmentConfig(Config):
     APIFAIRY_UI = "rapidoc"  # swagger_ui
     APIFAIRY_TITLE = "FKCOMMERCE Project"
 
+    WTF_CSRF_ENABLED = False
+
+    TESTING = True
     DEBUG = True
 
 

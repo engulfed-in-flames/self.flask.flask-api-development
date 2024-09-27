@@ -1,0 +1,16 @@
+<!-- prettier-ignore -->
+{% extends "_base.html" %} 
+{% block title %}Index{% endblock %} 
+{% block content%}
+<h1>Login Page</h1>
+<form action="{{ url_for('login')}}" method="POST">
+  <input type="text" name="email" placeholder="email" required /><br />
+  <input
+    type="password"
+    name="password"
+    placeholder="password"
+    required
+  /><br />
+  <input type="submit" value="Login" />
+</form>
+{% endblock %}
