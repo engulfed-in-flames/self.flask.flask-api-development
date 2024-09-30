@@ -15,7 +15,9 @@ from lab.dynamodb import create_user, create_user_table, find_user
 
 load_dotenv("flask.env")
 
-template_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "templates")
+root_dir = os.path.dirname(os.path.dirname(__file__))
+template_dir = os.path.join(root_dir, "templates")
+static_dir = os.path.join(root_dir, "static")
 
 db = SQLAlchemy()
 db_migration = Migrate()
@@ -26,7 +28,9 @@ bcrypt = Bcrypt()
 
 
 def create_app(config_type=os.getenv("CONFIG_TYPE")):
-    app = Flask(__name__, template_folder=template_dir)
+    app = Flask(
+        __name__, template_folder=template_dir, static_folder=static_dir, static_url_path="/static"
+    )
 
     app.config.from_object(config_type)
     initialize_extensions(app)
