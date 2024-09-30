@@ -60,11 +60,17 @@ docker compose down
 
 ## Features
 
-- Routing requests: Design and build RESTful APIs for various applications.
-- Data handling: Connect APIs to databases and manage data effectively.
-- Database Designing: Create well-structured and optimized database schemas to store and manage data efficiently.
-- Technology Stack: Utilize Docker for containerization to simplify deployment and management, and SQLAlchemy for object-relational mapping (ORM) to interact with databases in a Python-friendly way.
+- Flask essentials: Learn the core functionalities of Flask, including handling requests, responses, and blueprints.
+- Routing requests: Build RESTful APIs with efficient request routing.
+- Data handling: Implement robust techniques to connect APIs with databases and manage data transactions seamlessly.
+- Database Designing: Develop well-structured database schemas for efficient data storage and retrieval.
+- Technology Stack: Leverage Docker for containerization and SQLAlchemy for seamless database interactions using Python.
 
 ## Copyright
 
-This project serves as the final learning material for the course ["Try Flask API Development"](https://www.youtube.com/watch?v=Nl47u8zx8oM&list=PLOLrQ9Pn6caxBM0vaSzJdN4uD9V-DZ82L&index=1). All copyrights are owned by the course creators, and this project is intended solely for educational purposes and personal use. Any replication or commercial use of this code is prohibited without proper authorization.
+This project serves as the final learning material for the following two courses:
+
+- [Try Flask API Development](https://www.youtube.com/watch?v=Nl47u8zx8oM&list=PLOLrQ9Pn6caxBM0vaSzJdN4uD9V-DZ82L&index=1)
+- [Full Flask Course For Python - From Basics To Deployment](https://www.youtube.com/watch?v=oQ5UfJqW5Jo)
+
+All copyrights are owned by the course creators, and this project is intended solely for educational purposes and personal use.
