@@ -10,7 +10,6 @@ from flask_bcrypt import Bcrypt
 from apifairy import APIFairy
 
 from core.routes import register_routes
-from lab.dynamodb import create_user, create_user_table, find_user
 
 
 load_dotenv("flask.env")
@@ -29,17 +28,16 @@ bcrypt = Bcrypt()
 
 def create_app(config_type=os.getenv("CONFIG_TYPE")):
     app = Flask(
-        __name__, template_folder=template_dir, static_folder=static_dir, static_url_path="/static"
+        __name__,
+        template_folder=template_dir,
+        static_folder=static_dir,
+        static_url_path="/static",
     )
 
     app.config.from_object(config_type)
     initialize_extensions(app)
     register_blueprint(app)
     register_routes(app, db, bcrypt)
-
-    # create_user_table()
-    # create_user()
-    # find_user()
 
     return app
 
@@ -56,11 +54,11 @@ def initialize_extensions(app):
 
 def register_blueprint(app):
 
-    from core.inventory_api import inventory_category_api_blueprint
-    from core.user_api import user_api_bp
+    from blueprints.inventory import inventory_category_api_blueprint
+    from blueprints.user import user_api_bp
 
-    app.register_blueprint(inventory_category_api_blueprint, url_prefix="/api")
-    app.register_blueprint(user_api_bp, url_prefix="/api")
+    app.register_blueprint(inventory_category_api_blueprint, url_prefix="/api/category")
+    app.register_blueprint(user_api_bp, url_prefix="/api/user")
 
 
 @login_manager.user_loader
