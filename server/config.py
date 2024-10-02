@@ -1,5 +1,6 @@
 import os
 from dataclasses import dataclass
+from secrets import token_hex
 
 from sqlalchemy.engine.url import URL
 
@@ -14,6 +15,7 @@ class Config:
 
     CSRF_ENABLED = True
     WTF_CSRF_ENABLED = True
+    WTF_CSRF_SECRET_KEY = token_hex(32)
 
     TESTING = False
     DEBUG = os.getenv("FLASK_DEBUG")

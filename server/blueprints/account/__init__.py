@@ -1,7 +1,7 @@
 from flask import Blueprint
 
-inventory_bp = Blueprint(
-    "inventory_bp",
+account_bp = Blueprint(
+    "account_bp",
     __name__,
     template_folder="templates",
 )

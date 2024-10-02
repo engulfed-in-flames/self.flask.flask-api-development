@@ -1,9 +1,10 @@
 from flask import Blueprint
 
-user_api_bp = Blueprint(
-    "user_api",
+core_bp = Blueprint(
+    "core_bp",
     __name__,
     template_folder="templates",
 )
+
 
 from . import routes  # noqa: F401

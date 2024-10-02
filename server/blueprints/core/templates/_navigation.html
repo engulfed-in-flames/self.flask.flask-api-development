@@ -1,0 +1,21 @@
+<nav>
+  <ul>
+    <li>
+      <a href="{{ url_for('core_bp.index') }}">Home</a>
+    </li>
+  </ul>
+  <ul>
+    {% if current_user.is_authenticated %}
+      <li>
+        <a href="{{ url_for('account_bp.logout') }}" role="button">Logout</a>
+      </li>
+    {% else %}
+      <li>
+        <a href="{{ url_for('account_bp.login') }}" role="button">Login</a>
+      </li>
+      <li>
+        <a href="{{ url_for('account_bp.signup') }}" role="button">Sign up</a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
