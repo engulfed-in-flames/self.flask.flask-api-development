@@ -1,6 +1,7 @@
 migrations/
 postgres_data/
 dynamodb_data/
+localstack_data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
