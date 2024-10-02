@@ -1,4 +1,4 @@
-from core import ma
+from app import ma
 from marshmallow import fields
 
 

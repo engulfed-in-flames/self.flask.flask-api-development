@@ -1,0 +1,13 @@
+{% extends "_base.html" %} 
+{% block title %}Sign Up{% endblock %} 
+{% block content%}
+  <h1>Sign Up Page</h1>
+  {% from "_form_helpers.html" import render_field %}
+  <form action="{{ url_for('account_bp.signup')}}" method="POST">
+    {{ form.csrf_token}}
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.confirm) }}
+    <input type="submit" value="Sign Up" />
+  </form>
+{% endblock %}
