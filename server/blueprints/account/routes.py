@@ -4,10 +4,11 @@ from flask_login import login_user, logout_user, current_user
 from app import db, bcrypt
 from . import account_bp
 from .models import User
-from .schema import UserSchema
+
+# from .schema import UserSchema
 from .forms import SignupForm, LoginForm
 
-user_schema = UserSchema(many=True)
+# user_schema = UserSchema(many=True)
 
 
 @account_bp.route("/list-on-html", methods=["GET"])
