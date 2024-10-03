@@ -1,18 +1,16 @@
 from flask_login import UserMixin
-from sqlalchemy import (
-    Column,
-    Integer,
-    String,
-    Boolean,
-    DateTime,
-)
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, text
+from sqlalchemy.dialects.postgresql import UUID
 from app import db
 
 
-class User(db.Model, UserMixin):
-    __tablename__ = "user"
+class Account(db.Model, UserMixin):
+    __tablename__ = "account"
 
     id = Column(Integer, primary_key=True)
+    uuid = Column(
+        UUID(as_uuid=True), unique=True, nullable=False, server_default=text("uuid_generate_v4()")
+    )
     email = Column(String(100), unique=True, nullable=False)
     password = Column(String, nullable=False)
     is_admin = Column(Boolean, nullable=False, default=False)

@@ -60,9 +60,9 @@ def register_apis(app):
 
 @login_manager.user_loader
 def load_user(user_id):
-    from blueprints.account.models import User
+    from blueprints.account.models import Account
 
-    return User.query.get(user_id)
+    return Account.query.get(user_id)
 
 
 @login_manager.unauthorized_handler

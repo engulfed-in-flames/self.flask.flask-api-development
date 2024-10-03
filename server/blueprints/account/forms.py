@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import EmailField, StringField, PasswordField
 from wtforms.validators import DataRequired, EqualTo
 
-from .models import User
+from .models import Account
 
 
 class SignupForm(FlaskForm):
@@ -33,7 +33,7 @@ class SignupForm(FlaskForm):
         if not initial_validation:
             return False
 
-        user = User.query.filter_by(email=self.email.data).first()
+        user = Account.query.filter_by(email=self.email.data).first()
         if user and isinstance(self.email.errors, list):
             self.email.errors.append("The email already exists.")
             return False

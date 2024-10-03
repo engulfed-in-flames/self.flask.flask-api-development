@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, current_user
 
 from app import db, bcrypt
 from . import account_bp
-from .models import User
+from .models import Account
 
 # from .schema import UserSchema
 from .forms import SignupForm, LoginForm
@@ -13,7 +13,7 @@ from .forms import SignupForm, LoginForm
 
 @account_bp.route("/list-on-html", methods=["GET"])
 def users_on_html():
-    users = User.query.all()
+    users = Account.query.all()
     return render_template("account/index.html", users=users)
 
 
@@ -30,7 +30,7 @@ def signup():
         email = form.email.data
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
 
-        user = User(email=email, password=hashed_password)
+        user = Account(email=email, password=hashed_password)
         db.session.add(user)
         db.session.commit()
         login_user(user)
@@ -48,7 +48,7 @@ def login():
         return render_template("account/login.html", form=form)
 
     if request.method == "POST" and form.validate():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = Account.query.filter_by(email=form.email.data).first()
 
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
