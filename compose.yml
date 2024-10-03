@@ -8,8 +8,8 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./db/postgres_data:/var/lib/postgresql/data
-      - ./db:/docker-entrypoint-initdb.d
+      - ./volumes/postgres_data:/var/lib/postgresql/data
+      - ./volumes:/docker-entrypoint-initdb.d
     restart: always
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready']
@@ -28,7 +28,7 @@ services:
       - DEBUG=${DEBUG:-0}
     volumes:
       # - '${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack'
-      - './db/localstack_data:/var/lib/localstack'
+      - './volumes/localstack_data:/var/lib/localstack'
       - '/var/run/docker.sock:/var/run/docker.sock'
 
 volumes:
