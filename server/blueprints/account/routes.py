@@ -1,6 +1,5 @@
 from flask import request, render_template, redirect, url_for
 from flask_login import login_user, logout_user, current_user
-from apifairy import response
 
 from app import db, bcrypt
 from . import account_bp
@@ -9,12 +8,6 @@ from .schema import UserSchema
 from .forms import SignupForm, LoginForm
 
 user_schema = UserSchema(many=True)
-
-
-@account_bp.route("/list", methods=["GET"])
-@response(user_schema)
-def users():
-    return User.query.all()
 
 
 @account_bp.route("/list-on-html", methods=["GET"])

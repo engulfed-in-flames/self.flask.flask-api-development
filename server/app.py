@@ -7,7 +7,8 @@ from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
-from apifairy import APIFairy
+
+from apis import api
 
 
 load_dotenv("flask.env")
@@ -16,7 +17,6 @@ load_dotenv("flask.env")
 db = SQLAlchemy()
 db_migration = Migrate()
 ma = Marshmallow()
-api_fairy = APIFairy()
 login_manager = LoginManager()
 bcrypt = Bcrypt()
 
@@ -39,7 +39,7 @@ def initialize_extensions(app):
     db.init_app(app)
     db_migration.init_app(app, db)
     ma.init_app(app)
-    api_fairy.init_app(app)
+    api.init_app(app, title="Flask API Development")
     login_manager.init_app(app)
 
 
