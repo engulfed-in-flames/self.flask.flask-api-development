@@ -3,7 +3,6 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
@@ -14,7 +13,6 @@ load_dotenv("flask.env")
 
 db = SQLAlchemy()
 db_migration = Migrate()
-ma = Marshmallow()
 login_manager = LoginManager()
 bcrypt = Bcrypt()
 
@@ -37,7 +35,6 @@ def create_app(config_type=os.getenv("CONFIG_TYPE")):
 def initialize_extensions(app):
     db.init_app(app)
     db_migration.init_app(app, db)
-    ma.init_app(app)
     login_manager.init_app(app)
 
 
