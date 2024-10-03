@@ -3,6 +3,8 @@ from sqlalchemy import Column, Integer, String, Boolean, DateTime, text
 from sqlalchemy.dialects.postgresql import UUID
 from app import db
 
+from typing import Optional, Self
+
 
 class Account(db.Model, UserMixin):
     __tablename__ = "account"
@@ -25,4 +27,20 @@ class Account(db.Model, UserMixin):
         self.is_admin = is_admin
 
     def __repr__(self) -> str:
-        return f"<User: {self.email}"
+        return f"<{self.__class__.__name__}: {self.email}"
+
+    @classmethod
+    def find_by_email(cls, email: str) -> Optional[Self]:
+        return cls.query.filter_by(email=email).first()
+
+    @classmethod
+    def find_all(cls) -> list[Self]:
+        return cls.query.all()
+
+    def save_to_db(self) -> None:
+        db.session.add(self)
+        db.session.commit()
+
+    def delete_from_db(self) -> None:
+        db.session.delete(self)
+        db.session.commit()
