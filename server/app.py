@@ -45,12 +45,10 @@ def register_blueprint(app):
 
     from blueprints.core import core_bp
     from blueprints.account import account_bp
-    from blueprints.inventory import inventory_bp
     from blueprints.localstack import localstack_bp
 
     app.register_blueprint(core_bp, url_prefix="/")
     app.register_blueprint(account_bp, url_prefix="/account")
-    app.register_blueprint(inventory_bp, url_prefix="/inventory")
     app.register_blueprint(localstack_bp, url_prefix="/localstack")
 
 
