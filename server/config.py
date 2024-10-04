@@ -1,19 +1,18 @@
 import os
 from dataclasses import dataclass
-from secrets import token_urlsafe
 
 from sqlalchemy.engine.url import URL
 
 
 @dataclass(frozen=True)
 class Config:
-    SECRET_KEY = token_urlsafe(20)
+    SECRET_KEY = os.urandom(16)
     FLASK_ENV = os.getenv("FLASK_ENV")
     DEBUG = os.getenv("FLASK_DEBUG")
     TESTING = False
     CSRF_ENABLED = True
     WTF_CSRF_ENABLED = True
-    WTF_CSRF_SECRET_KEY = token_urlsafe(32)
+    WTF_CSRF_SECRET_KEY = os.urandom(32)
 
 
 @dataclass(frozen=True)
