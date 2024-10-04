@@ -1,6 +1,6 @@
 from flask import Blueprint
 
-localstack_bp = Blueprint(
+bp = Blueprint(
     "localstack_bp",
     __name__,
     template_folder="templates",

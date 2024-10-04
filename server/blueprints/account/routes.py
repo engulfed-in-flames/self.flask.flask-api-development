@@ -2,18 +2,18 @@ from flask import request, render_template, redirect, url_for
 from flask_login import login_user, logout_user, current_user
 
 from app import db, bcrypt
-from . import account_bp
+from . import bp
 from .models import Account
 from .forms import SignupForm, LoginForm
 
 
-@account_bp.route("/list-on-html", methods=["GET"])
+@bp.route("/list-on-html", methods=["GET"])
 def accounts_on_html():
     accounts = Account.query.all()
     return render_template("account/index.html", accounts=accounts)
 
 
-@account_bp.route("/signup", methods=["GET", "POST"])
+@bp.route("/signup", methods=["GET", "POST"])
 def signup():
     if current_user.is_authenticated:
         return redirect(url_for("core_bp.index"))
@@ -36,7 +36,7 @@ def signup():
     return render_template("account/signup.html", form=form)
 
 
-@account_bp.route("/login", methods=["GET", "POST"])
+@bp.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for("core_bp.index"))
@@ -55,7 +55,7 @@ def login():
     return render_template("account/login.html", form=form)
 
 
-@account_bp.route("/logout")
+@bp.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for("core_bp.index"))

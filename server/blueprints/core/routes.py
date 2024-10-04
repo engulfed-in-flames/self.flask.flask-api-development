@@ -8,26 +8,26 @@ from flask import (
 )
 from flask_login import login_required
 
-from . import core_bp
+from . import bp
 
 
-@core_bp.route("/", methods=["GET"])
+@bp.route("/", methods=["GET"])
 def index():
     return render_template("core/index.html")
 
 
-@core_bp.route("/secret")
+@bp.route("/secret")
 @login_required
 def secret():
     return "<h1>This is a private page!</h1>"
 
 
-@core_bp.route("/<int:n1>/<int:n2>")
+@bp.route("/<int:n1>/<int:n2>")
 def handle_url_params(n1, n2):
     return f"{n1} + {n2} = {n1 + n2}"
 
 
-@core_bp.route("/query")
+@bp.route("/query")
 def handle_url_query_params():
     if len(request.args) == 0:
         return "<h1>There is no query params at all.</h1>"
@@ -39,7 +39,7 @@ def handle_url_query_params():
     return "".join(queries)
 
 
-@core_bp.route("/response")
+@bp.route("/response")
 def handle_response():
     response = make_response("Hello, World!")
     response.status_code = 202
@@ -48,7 +48,7 @@ def handle_response():
     return response
 
 
-# @core_bp.route("/file", methods=["GET", "POST"])
+# @bp.route("/file", methods=["GET", "POST"])
 # def handle_file():
 #     if request.method == "GET":
 #         return render_template("upload_file.html")
@@ -70,14 +70,14 @@ def handle_response():
 #             return "Invalid file type. Please, upload an image."
 
 
-@core_bp.route("/set-session")
+@bp.route("/set-session")
 def set_session():
     session["foo"] = "bar"
 
     return "<h1>Session Data Set</h1>"
 
 
-@core_bp.route("/get-session")
+@bp.route("/get-session")
 def get_session():
     if len(session) == 0:
         return "<h1>No Session Found</h1>"
@@ -88,7 +88,7 @@ def get_session():
     return render_template("core/get_session.html", values=[value1, value2])
 
 
-@core_bp.route("/clear-session")
+@bp.route("/clear-session")
 def clear_session():
     session.clear()
 
