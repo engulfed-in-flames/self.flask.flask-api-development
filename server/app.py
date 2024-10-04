@@ -8,7 +8,7 @@ from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 
 
-load_dotenv("flask.env")
+load_dotenv(".env.dev")
 
 
 db = SQLAlchemy()
@@ -17,14 +17,14 @@ login_manager = LoginManager()
 bcrypt = Bcrypt()
 
 
-def create_app(config_type=os.getenv("CONFIG_TYPE")):
+def create_app(config_object=os.getenv("CONFIG_OBJECT")):
     app = Flask(
         __name__,
         # static_folder="static",
         # static_url_path="/static",
     )
 
-    app.config.from_object(config_type)
+    app.config.from_object(config_object)
     initialize_extensions(app)
     register_blueprint(app)
     register_apis(app)
