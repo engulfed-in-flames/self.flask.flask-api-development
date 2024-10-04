@@ -17,33 +17,25 @@ login_manager = LoginManager()
 bcrypt = Bcrypt()
 
 
-def create_app(config_object=os.getenv("CONFIG_OBJECT")):
-    app = Flask(
-        __name__,
-        # static_folder="static",
-        # static_url_path="/static",
-    )
-
+def create_app(config_object=os.getenv("CONFIG_OBJECT")) -> Flask:
+    app = Flask(__name__)
     app.config.from_object(config_object)
-    register_extensions(app)
-    register_blueprint(app)
-    register_apis(app)
 
     return app
 
 
-def register_extensions(app):
+def register_extensions(app: Flask):
     db.init_app(app)
     migrate.init_app(app, db)
     login_manager.init_app(app)
 
 
-def register_blueprint(app):
+def register_blueprint(app: Flask):
 
-    from blueprints.core import core_bp
-    from blueprints.account import account_bp
+    from blueprints.core import bp as core_bp
+    from blueprints.account import bp as account_bp
     from blueprints.pydantic import bp as pydantic_bp
-    from blueprints.localstack import localstack_bp
+    from blueprints.localstack import bp as localstack_bp
 
     app.register_blueprint(core_bp, url_prefix="/")
     app.register_blueprint(account_bp, url_prefix="/account")
@@ -51,7 +43,7 @@ def register_blueprint(app):
     app.register_blueprint(pydantic_bp, url_prefix="/pydantic")
 
 
-def register_apis(app):
+def register_apis(app: Flask):
     from apis import api
 
     api.init_app(app)
@@ -70,3 +62,6 @@ def handle_unauthorized():
 
 
 app = create_app()
+register_extensions(app)
+register_blueprint(app)
+register_apis(app)
