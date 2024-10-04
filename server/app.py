@@ -12,7 +12,7 @@ load_dotenv(".env.dev")
 
 
 db = SQLAlchemy()
-db_migration = Migrate()
+migrate = Migrate()
 login_manager = LoginManager()
 bcrypt = Bcrypt()
 
@@ -25,16 +25,16 @@ def create_app(config_object=os.getenv("CONFIG_OBJECT")):
     )
 
     app.config.from_object(config_object)
-    initialize_extensions(app)
+    register_extensions(app)
     register_blueprint(app)
     register_apis(app)
 
     return app
 
 
-def initialize_extensions(app):
+def register_extensions(app):
     db.init_app(app)
-    db_migration.init_app(app, db)
+    migrate.init_app(app, db)
     login_manager.init_app(app)
 
 
