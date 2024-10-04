@@ -42,11 +42,13 @@ def register_blueprint(app):
 
     from blueprints.core import core_bp
     from blueprints.account import account_bp
+    from blueprints.pydantic import bp as pydantic_bp
     from blueprints.localstack import localstack_bp
 
     app.register_blueprint(core_bp, url_prefix="/")
     app.register_blueprint(account_bp, url_prefix="/account")
     app.register_blueprint(localstack_bp, url_prefix="/localstack")
+    app.register_blueprint(pydantic_bp, url_prefix="/pydantic")
 
 
 def register_apis(app):

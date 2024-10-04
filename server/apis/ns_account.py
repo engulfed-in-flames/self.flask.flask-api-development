@@ -1,12 +1,28 @@
 from flask_restx import Namespace, Resource, fields
 
-api = Namespace("accounts", description="APIs for Accounts")
+api = Namespace("account", description="APIs for Accounts")
 
 account = api.model(
     "account",
     {
-        "email": fields.String(required=True, description="Your Email Address"),
-        "name": fields.String(required=True, description="Your real name"),
+        "uuid": fields.String(required=True, description="Your Account UUID"),
+        "email": fields.String(required=True, description="Your Account Email"),
+        "created_at": fields.DateTime(
+            required=True,
+            description="DateTime When Your Account Was Created",
+        ),
+    },
+)
+
+pydantic_account = api.model(
+    "pydantic_account",
+    {
+        "uuid": fields.String(required=True, description="Your Pydantic Account UUID"),
+        "email": fields.String(required=True, description="Your Pydantic Account Email"),
+        "created_at": fields.DateTime(
+            required=True,
+            description="DateTime When Your Account Was Created",
+        ),
     },
 )
 
@@ -25,6 +41,8 @@ class AccountList(Resource):
     def get(self):
         """Shows a list of all accounts"""
         return ACCOUNTS
+
+    def post(self): ...
 
 
 @api.route("/<int:index>")

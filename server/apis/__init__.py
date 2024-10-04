@@ -1,6 +1,7 @@
 from flask_restx import Api
 
 from .ns_account import api as ns_account
+from .ns_pydantic_account import api as ns_pydantic_account
 
 
 api = Api(
@@ -10,3 +11,4 @@ api = Api(
 )
 
 api.add_namespace(ns_account, path="/api/account")
+api.add_namespace(ns_pydantic_account, path="/api/pydantic-account")
