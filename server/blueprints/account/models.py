@@ -1,15 +1,14 @@
+from typing import Optional, Self
 from flask_login import UserMixin
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, text
 from sqlalchemy.dialects.postgresql import UUID
 from app import db
 
-from typing import Optional, Self
-
 
 class Account(db.Model, UserMixin):
     __tablename__ = "account"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     uuid = Column(
         UUID(as_uuid=True), unique=True, nullable=False, server_default=text("uuid_generate_v4()")
     )
@@ -36,11 +35,3 @@ class Account(db.Model, UserMixin):
     @classmethod
     def find_all(cls) -> list[Self]:
         return cls.query.all()
-
-    def save_to_db(self) -> None:
-        db.session.add(self)
-        db.session.commit()
-
-    def delete_from_db(self) -> None:
-        db.session.delete(self)
-        db.session.commit()

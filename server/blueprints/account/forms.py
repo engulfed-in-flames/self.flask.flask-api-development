@@ -33,11 +33,11 @@ class SignupForm(FlaskForm):
         if not initial_validation:
             return False
 
-        user = Account.query.filter_by(email=self.email.data).first()
-        if user and isinstance(self.email.errors, list):
+        account = Account.query.filter_by(email=self.email.data).first()
+        if account:
             self.email.errors.append("The email already exists.")
             return False
-        if (self.password.data != self.confirm.data) and isinstance(self.password.errors, list):
+        if self.password.data != self.confirm.data:
             self.password.errors.append("Passwords must match.")
             return False
         return True

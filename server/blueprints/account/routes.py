@@ -4,17 +4,13 @@ from flask_login import login_user, logout_user, current_user
 from app import db, bcrypt
 from . import account_bp
 from .models import Account
-
-# from .schema import UserSchema
 from .forms import SignupForm, LoginForm
-
-# user_schema = UserSchema(many=True)
 
 
 @account_bp.route("/list-on-html", methods=["GET"])
-def users_on_html():
-    users = Account.query.all()
-    return render_template("account/index.html", users=users)
+def accounts_on_html():
+    accounts = Account.query.all()
+    return render_template("account/index.html", accounts=accounts)
 
 
 @account_bp.route("/signup", methods=["GET", "POST"])
@@ -23,19 +19,21 @@ def signup():
         return redirect(url_for("core_bp.index"))
 
     form = SignupForm(request.form)
-    if request.method == "GET":
-        return render_template("account/signup.html", form=form)
 
     if request.method == "POST" and form.validate():
-        email = form.email.data
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
+        try:
+            email = form.email.data
+            hashed_password = bcrypt.generate_password_hash(form.password.data).decode("utf-8")
 
-        user = Account(email=email, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        login_user(user)
+            account = Account(email=email, password=hashed_password)
+            db.session.add(account)
+            db.session.commit()
+            login_user(account)
+            return redirect(url_for("core_bp.index"))
+        except:
+            db.session.rollback()
 
-        return redirect(url_for("core_bp.index"))
+    return render_template("account/signup.html", form=form)
 
 
 @account_bp.route("/login", methods=["GET", "POST"])
@@ -44,18 +42,17 @@ def login():
         return redirect(url_for("core_bp.index"))
 
     form = LoginForm(request.form)
-    if request.method == "GET":
-        return render_template("account/login.html", form=form)
 
     if request.method == "POST" and form.validate():
-        user = Account.query.filter_by(email=form.email.data).first()
+        account = Account.query.filter_by(email=form.email.data).first()
 
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user)
+        if account and bcrypt.check_password_hash(account.password, form.password.data):
+            login_user(account)
             return redirect(url_for("core_bp.index"))
         else:
             form.password.errors.append("Email or password is invalid.")
-            return render_template("account/login.html", form=form)
+
+    return render_template("account/login.html", form=form)
 
 
 @account_bp.route("/logout")
