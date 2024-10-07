@@ -1,0 +1,11 @@
+.flashes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.btn-close {
+  padding: 0 8px;
+  margin: 0;
+}

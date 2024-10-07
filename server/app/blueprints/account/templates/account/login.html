@@ -1,0 +1,12 @@
+{% extends "_base.html" %} 
+{% block title %}Login{% endblock %} 
+{% block content%}
+<h1>Login Page</h1>
+{% from "_macros.html" import render_field %}
+<form action="{{ url_for('account.login')}}" method="POST">
+  {{ form.csrf_token}}
+  {{ render_field(form.email) }}
+  {{ render_field(form.password) }}
+  <input type="submit" value="Login" />
+</form>
+{% endblock %}

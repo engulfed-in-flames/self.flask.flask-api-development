@@ -60,6 +60,7 @@ docker compose down
 
 ## Features
 
+- Project Layout: Follow to the recommended project structure outlined in the Flask Tutorial.
 - Flask essentials: Learn the core functionalities of Flask, including handling requests, responses, and blueprints.
 - Routing requests: Build RESTful APIs with efficient request routing.
 - Data handling: Implement robust techniques to connect APIs with databases and manage data transactions seamlessly.

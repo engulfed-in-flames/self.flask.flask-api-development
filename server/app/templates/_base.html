@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
+    >
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script defer src="{{ url_for('static', filename='index.js') }}"></script>
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <header class="container">
+      {% include "_navigation.html" %}
+    </header>
+    {% include "_flashes.html" %}
+    <main class="container">
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

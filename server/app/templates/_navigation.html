@@ -1,0 +1,33 @@
+<nav>
+  <ul>
+    <li>
+      <a href="{{ url_for('main.index') }}">Home</a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <details class="dropdown">
+        <summary>
+          Links
+        </summary>
+        <ul dir="rtl">
+          {% if current_user.is_authenticated %}
+            <li>
+              <a href="{{ url_for('account.logout') }}">Logout</a>
+            </li>
+          {% else %}
+            <li>
+              <a href="{{ url_for('account.login') }}">Login: without Pydantic</a>
+            </li>
+            <li>
+              <a href="{{ url_for('account.signup') }}">Sign up: without Pydantic</a>
+            </li>
+          {% endif %}
+          <li>
+            <a href="{{ url_for('pydantic.create_account') }}">Create Account: with Pydantic</a>
+          </li>
+        </ul>
+      </details>
+    </li>
+  </ul>
+</nav>
