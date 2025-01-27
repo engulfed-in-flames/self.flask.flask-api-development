@@ -19,9 +19,13 @@ bcrypt = Bcrypt()
 def create_app(config_object=os.getenv("CONFIG_OBJECT")) -> Flask:
     app = Flask(__name__)
     app.config.from_object(config_object)
-    register_extensions(app)
-    register_blueprint(app)
-    register_apis(app)
+
+    # Crucial to avoid circular imports and to ensure that the app is properly configured
+    # before any requests are made
+    with app.app_context():
+        register_extensions(app)
+        register_blueprint(app)
+        register_apis(app)
 
     return app
 
